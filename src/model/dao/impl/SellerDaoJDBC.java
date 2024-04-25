@@ -53,6 +53,7 @@ public class SellerDaoJDBC implements SellerDAO{
 					);
 			st.setInt(1, id);
 			rs = st.executeQuery();
+			
 			  /*
 			  após a execução da Query, o 'rs' retorna um índice zero que
 			  por sua vez não contém dado alugum. Então, terei que validar
@@ -60,19 +61,12 @@ public class SellerDaoJDBC implements SellerDAO{
 			  e se esse índice estiver vazio, quer dizer que não retornou nada.
 			  */
 			if(rs.next()) { //verifica o próximo índice para testar se veio algum resultado.
+				
 				//instanciaremos os objetos e os associaremos um ao outro pois o ResultSet retornou algo.
-				Department dep = new Department(); //instanciação do objeto
-				dep.setId(rs.getInt("DepartmentId")); //vai retornar o valor que foi obtido no ResultSet dessa coluna
-				dep.setName(rs.getString("DepName"));
 				
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setBaseSalary(rs.getDouble("BaseSalary"));
-				obj.setBirthDate(rs.getDate("BirthDate"));
+				Department dep = instantiateDepartment(rs);
 				
-				obj.setDepartment(dep); //objeto department associado 
+				Seller obj = instantiateSeller(rs, dep);
 				
 				return obj;
 			}
@@ -86,6 +80,24 @@ public class SellerDaoJDBC implements SellerDAO{
 			DB.ResultSet(rs);
 			//não se fecha a conexão nesse caso pois o mesmo objeto DAO pode efetuar várias operação com a mesma conexão
 		}
+	}
+
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dep = new Department(); 
+		dep.setId(rs.getInt("DepartmentId")); 
+		dep.setName(rs.getString("DepName"));
+		return dep;
+	}
+
+	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setBaseSalary(rs.getDouble("BaseSalary"));
+		obj.setBirthDate(rs.getDate("BirthDate"));
+		obj.setDepartment(dep);
+		return obj;
 	}
 
 	@Override
