@@ -11,5 +11,6 @@ public interface DepartmentDAO {
 	void deleteById(Integer id);//deletar através de um id, um departamento no db
 	Department findById(Integer id);//achar um departamento no db, através de um id
 	List<Department> findAll();//retornar todos os departamentos do db
+	
 
 }
