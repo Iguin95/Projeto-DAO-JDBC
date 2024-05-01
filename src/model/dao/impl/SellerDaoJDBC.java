@@ -162,7 +162,7 @@ public class SellerDaoJDBC implements SellerDAO{
 		finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
-			//não se fecha a conexão nesse caso pois o mesmo objeto DAO pode efetuar várias operação com a mesma conexão
+			//não se fecha a conexão nesse caso pois o mesmo objeto DAO pode efetuar várias operações com a mesma conexão
 		}
 	}
 	//vai inicializar um novo departamento

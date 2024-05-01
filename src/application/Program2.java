@@ -18,7 +18,9 @@ public class Program2 {
 		//depDao.insert(newDep);
 		System.out.println("Departamento inserido! Novo id = " + newDep.getId());
 		
-		
+		System.out.println("\n< ============ TEST 2: Department FindById ============ > ");
+		Department dep = depDao.findById(3);
+		System.out.println(dep);
 		sc.close();
 
 	}
