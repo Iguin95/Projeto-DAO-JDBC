@@ -198,16 +198,21 @@ public class SellerDaoJDBC implements SellerDAO{
 			
 			rs = st.executeQuery();
 			
-			List<Seller> list = new ArrayList<Seller>();
-			Map<Integer, Department> map = new HashMap<>();
+			List<Seller> list = new ArrayList<Seller>(); //Criação da lista de vendedores.
+			Map<Integer, Department> map = new HashMap<>(); //Cada departamento (Valor - Nome do departamento) será associado ao seu id (Chave).
 			
-			while(rs.next()) {
-				Department dep = map.get(rs.getInt("DepartmentId"));
-				if(dep == null) {
-					dep = instantiateDepartment(rs);
-					map.put(rs.getInt("DepartmentId"), dep);
+			while(rs.next()) { //Enquanto houver dados guardados no ResultSet faça... Por ser uma lista que a estrutura de repetição while foi utilizada.
+				
+				Department dep = map.get(rs.getInt("DepartmentId")); /*O objeto departamento será instanciado(criado).
+				com o valor da chave do departamento, caso houver*/
+				
+				if(dep == null) { //Se não houver departamento com o id informado, será instanciado um novo departamento.
+					dep = instantiateDepartment(rs); //Instanciação do departamento.
+					map.put(rs.getInt("DepartmentId"), dep); //O departamento - dep - será associado com sua chave, que é seu Id - rs.getInt("DepartmentId").
 				}
-				Seller obj = instantiateSeller(rs, dep);
+				Seller obj = instantiateSeller(rs, dep);/*Cada vendedor será instanciado com um departamento, mas sem duplicidade
+				de departamento. Caso o departamento já exista, ele será reaproveitado, caso não, será criado para que na próxima
+				instanciação com o vendedor ele seja reaproveitado.*/
 				
 				list.add(obj);
 			}
