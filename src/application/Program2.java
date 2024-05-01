@@ -17,7 +17,7 @@ public class Program2 {
 		
 		System.out.println("\n< ============ TEST 1: Department Insert ============ > ");
 		Department newDep = new Department(null, "Logística");
-		//depDao.insert(newDep);
+		depDao.insert(newDep);
 		System.out.println("Departamento inserido! Novo id = " + newDep.getId());
 		
 		System.out.println("\n< ============ TEST 2: Department FindById ============ > ");
@@ -34,10 +34,15 @@ public class Program2 {
 		System.out.println("\n< ============ TEST 4: Department Delete ============ > ");
 		System.out.print("Entre com o id para deletar: ");
 		int id = sc.nextInt();
-		//depDao.deleteById(id);
+		depDao.deleteById(id);
 		System.out.println("Id " + id + " Deletado!");
 		
 		System.out.println("\n< ============ TEST 5: Department Update ============ > ");
+		dep = depDao.findById(6);
+		dep.setName("Estamparia");
+		depDao.update(dep);
+		System.out.println("Atualização completada!");
+		
 		
 		sc.close();
 	}
