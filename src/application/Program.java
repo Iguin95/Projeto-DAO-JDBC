@@ -15,7 +15,7 @@ public class Program {
 
 		Scanner sc = new Scanner(System.in);
 		// injeção de dependência sem explicitar a implementação, dessa forma eu chamo a
-		// fábrica de DAO que através do método, instanciará e criara o SellerDAO
+		// fábrica de DAO que através do método, instanciará e criará o SellerDAO
 		SellerDAO sellerDao = DaoFactory.createSellerDao();
 
 		System.out.println("< ============ TEST 1: seller FindById ============ > ");

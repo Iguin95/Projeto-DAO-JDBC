@@ -54,7 +54,7 @@ public class SellerDaoJDBC implements SellerDAO{
 					obj.setId(id); /*Inserindo no novo objeto Seller passado como argumento
 					neste método o id capturado.*/
 				}
-				DB.ResultSet(rs); /*Foi criado dentro do escopo do 'if', então tenho que 
+				DB.closeResultSet(rs); /*Foi criado dentro do escopo do 'if', então tenho que 
 				fecha-lo dentro do mesmo escopo, pois fora, ele não existe.*/
 				
 			} //Caso na inserção, nenhuma linha for afetada, será lançada uma exceção.
@@ -161,18 +161,18 @@ public class SellerDaoJDBC implements SellerDAO{
 		}
 		finally {
 			DB.closeStatement(st);
-			DB.ResultSet(rs);
+			DB.closeResultSet(rs);
 			//não se fecha a conexão nesse caso pois o mesmo objeto DAO pode efetuar várias operação com a mesma conexão
 		}
 	}
-
+	//vai inicializar um novo departamento
 	private Department instantiateDepartment(ResultSet rs) throws SQLException {
 		Department dep = new Department(); 
 		dep.setId(rs.getInt("DepartmentId")); 
 		dep.setName(rs.getString("DepName"));
 		return dep;
 	}
-
+	//vai inicializar um novo vendedor
 	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
 		Seller obj = new Seller();
 		obj.setId(rs.getInt("Id"));
@@ -218,7 +218,7 @@ public class SellerDaoJDBC implements SellerDAO{
 		}
 		finally {
 			DB.closeStatement(st);
-			DB.ResultSet(rs);
+			DB.closeResultSet(rs);
 		}
 	}
 
@@ -273,7 +273,7 @@ public class SellerDaoJDBC implements SellerDAO{
 		}
 		finally {
 			DB.closeStatement(st);
-			DB.ResultSet(rs);
+			DB.closeResultSet(rs);
 		}
 	}
 
