@@ -23,7 +23,6 @@ public class Program2 {
 		System.out.println("\n< ============ TEST 2: Department FindById ============ > ");
 		Department dep = depDao.findById(3);
 		System.out.println(dep);
-		sc.close();
 		
 		System.out.println("\n< ============ TEST 3: Department FindAll ============ > ");
 		List<Department> list = new ArrayList<Department>();
@@ -32,8 +31,15 @@ public class Program2 {
 			System.out.println(d);
 		}
 		
+		System.out.println("\n< ============ TEST 4: Department Delete ============ > ");
+		System.out.print("Entre com o id para deletar: ");
+		int id = sc.nextInt();
+		//depDao.deleteById(id);
+		System.out.println("Id " + id + " Deletado!");
 		
-
+		System.out.println("\n< ============ TEST 5: Department Update ============ > ");
+		
+		sc.close();
 	}
 
 }
